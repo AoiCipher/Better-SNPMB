@@ -11,7 +11,7 @@ export interface PTN {
   id_ptn: number;
   kode_ptn: number;
   nama: string;
-  type: "akademik" | "vokasi" | string;
+  type: "akademik" | "vokasi" | "ptkin" | string;
   alamat: string;
   provinsi: PTNProvinsi[];
 }

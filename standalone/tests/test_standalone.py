@@ -49,6 +49,17 @@ def test_clean_ptn():
     assert cleaned["type"] == "akademik"
     assert cleaned["alamat"] == "Depok"
 
+    raw_ptkin = {
+        "id_ptn": 13,
+        "kode_ptn": "122",
+        "nama": "UIN JAKARTA",
+        "is_akademik": 1,
+        "is_ptkin": 1,
+        "is_ptnbh": 0,
+        "is_vokasi": 0,
+    }
+    assert clean_ptn(raw_ptkin)["type"] == "ptkin"
+
 
 def test_filter_ptns():
     ptns = [

@@ -40,6 +40,18 @@ def test_clean_ptn() -> None:
     assert cleaned["type"] == "vokasi"
     assert cleaned["alamat"] == "none"
 
+    raw_ptkin: dict[str, object] = {
+        "id_ptn": 102,
+        "kode_ptn": 1002,
+        "nama": " UIN JAKARTA ",
+        "is_akademik": 1,
+        "is_ptkin": 1,
+        "is_ptnbh": 0,
+        "is_vokasi": 0,
+    }
+    cleaned_ptkin = clean_ptn(raw_ptkin)
+    assert cleaned_ptkin["type"] == "ptkin"
+
 
 def test_clean_prodi() -> None:
     raw: dict[str, object] = {

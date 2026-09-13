@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { GraduationCap, Menu, X, Scale, Search, Home } from "lucide-react";
+import { GraduationCap, Menu, X, Scale, Search, Home, FileText } from "lucide-react";
 import { useCompare } from "@/hooks/useCompare";
 
 export function Header() {
@@ -20,6 +20,7 @@ export function Header() {
       icon: Scale,
       badge: compareList.length > 0 ? compareList.length : undefined,
     },
+    { href: "/docs", label: "API Docs", icon: FileText },
   ];
 
   return (

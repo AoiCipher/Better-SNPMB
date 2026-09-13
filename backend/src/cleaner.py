@@ -101,8 +101,14 @@ def clean_prodi(item: dict[str, object], is_snbp: bool) -> dict[str, object]:
 
 def clean_ptn(item: dict[str, object]) -> dict[str, object]:
     """Clean and standardize raw PTN dictionary."""
+    is_ptkin = item.get("is_ptkin")
     is_vokasi = item.get("is_vokasi")
-    ptn_type = "vokasi" if str(is_vokasi) in ("1", "True") else "akademik"
+    if str(is_ptkin) in ("1", "True"):
+        ptn_type = "ptkin"
+    elif str(is_vokasi) in ("1", "True"):
+        ptn_type = "vokasi"
+    else:
+        ptn_type = "akademik"
 
     raw_prov = item.get("provinsi")
     prov_list: list[dict[str, str]] = []

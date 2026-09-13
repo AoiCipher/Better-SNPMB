@@ -15,6 +15,8 @@ app = FastAPI(
     title="Better SNPMB Data Explorer API",
     description="Better SNPMB Data Explorer (B-SNPMB) Backend Service",
     version="1.0.0",
+    docs_url=None,
+    redoc_url=None,
 )
 
 app.add_middleware(
