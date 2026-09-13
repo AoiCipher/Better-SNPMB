@@ -5,10 +5,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from unittest.mock import AsyncMock, patch
+import asyncio
+from unittest.mock import AsyncMock, MagicMock, patch
+
 from fastapi.testclient import TestClient
 from main import _CLIENT_REQUESTS, app
 from src.cleaner import clean_prodi, clean_ptn, clean_query, filter_ptns
+from src.fetcher import _try_write_json, fetch_ptns
 
 client = TestClient(app)
 
@@ -137,10 +140,26 @@ def test_cors_headers() -> None:
     assert response.headers.get("access-control-allow-origin") == "http://localhost:3000"
 
 
+def test_try_write_json_readonly_suppression() -> None:
+    mock_path = MagicMock()
+    mock_path.write_text.side_effect = OSError("Read-only file system")
+    # Should not raise exception
+    _try_write_json({"test": "data"}, mock_path)
+
+
+def test_fetch_ptns_fallback_on_upstream_failure() -> None:
+    with patch("aiohttp.ClientSession.get", side_effect=Exception("Network error")):
+        res = asyncio.run(fetch_ptns(is_snbp=True, kota="semarang"))
+        assert len(res) > 0
+        assert any("SEMARANG" in str(p.get("nama", "")).upper() or any("Semarang" in str(pr.get("nama_kota")) for pr in p.get("provinsi", [])) for p in res)
+
+
 if __name__ == "__main__":
     test_clean_ptn()
     test_clean_prodi()
     test_filter_ptns()
     test_health_endpoint()
     test_rate_limiter_middleware()
+    test_try_write_json_readonly_suppression()
+    test_fetch_ptns_fallback_on_upstream_failure()
     print("All unit and integration tests passed!")
