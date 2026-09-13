@@ -109,4 +109,4 @@ Exports full dataset to `unifinfo.json`.
 
 ## Disclaimer
 
-Better SNPMB Data Explorer (B-SNPMB) is an independent open-source project and is **not** affiliated with, authorized, maintained, sponsored, or endorsed by SNPMB (Seleksi Nasional Penerimaan Mahasiswa Baru), BP3, or the Ministry of Education, Culture, Research, and Technology of the Republic of Indonesia. All data is retrieved from public data endpoints for educational and research purposes only. Official university admission data must always be verified directly through the [official SNPMB portal](https://snpmb.bppp.kemdikbud.go.id).
+Better SNPMB Data Explorer (B-SNPMB) is an independent open-source project and is **not** affiliated with, authorized, maintained, sponsored, or endorsed by SNPMB (Seleksi Nasional Penerimaan Mahasiswa Baru), BP3, or the Ministry of Education, Culture, Research, and Technology of the Republic of Indonesia. All data is retrieved from public data endpoints for educational and research purposes only. Official university admission data must always be verified directly through the [official SNPMB portal](https://snpmb.id).
