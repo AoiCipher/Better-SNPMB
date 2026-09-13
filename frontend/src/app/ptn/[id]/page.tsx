@@ -116,49 +116,43 @@ export default function PTNDetailPage({ params }: { params: Promise<{ id: string
       {/* Back Button */}
       <Link
         href={`/search?jalur=${jalur}`}
-        className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+        className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-zinc-400 hover:text-white transition-colors border border-zinc-800 bg-zinc-950 px-3.5 py-2 rounded-xl"
       >
         <ArrowLeft className="w-4 h-4" />
-        <span>Kembali ke Pencarian</span>
+        <span>KEMBALI KE PENCARIAN</span>
       </Link>
 
       {/* PTN Header Banner */}
-      <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+      <div className="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 sm:p-8 shadow-xl space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-3">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-mono font-medium px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-600 border border-slate-200">
-                Kode PTN: {ptn ? ptn.kode_ptn || ptn.id_ptn : ptnId}
+              <span className="text-xs font-mono font-bold px-3 py-1 rounded-md bg-black text-zinc-300 border border-zinc-800">
+                KODE PTN: {ptn ? ptn.kode_ptn || ptn.id_ptn : ptnId}
               </span>
               {ptn && (
-                <span
-                  className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${
-                    ptn.type.toLowerCase() === "vokasi"
-                      ? "bg-purple-50 text-purple-700 border-purple-200"
-                      : "bg-blue-50 text-blue-700 border-blue-200"
-                  }`}
-                >
+                <span className="text-xs font-mono font-bold px-3 py-1 rounded-full border bg-white text-black border-white">
                   {ptn.type.toUpperCase()}
                 </span>
               )}
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+            <h1 className="text-2xl sm:text-4xl font-black text-white leading-tight">
               {ptn ? ptn.nama : `Perguruan Tinggi Negeri #${ptnId}`}
             </h1>
 
             {ptn && (
-              <div className="space-y-1 text-xs sm:text-sm text-slate-600">
-                <div className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-                  <span className="font-medium text-slate-700">
+              <div className="space-y-1.5 text-xs sm:text-sm text-zinc-400">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-white shrink-0" />
+                  <span className="font-semibold text-zinc-300">
                     {provList.join(", ") || "Indonesia"}
                     {kotaList.length > 0 && ` (${kotaList.join(", ")})`}
                   </span>
                 </div>
                 {ptn.alamat && ptn.alamat !== "none" && (
-                  <div className="flex items-center gap-1.5 text-slate-500">
-                    <Building2 className="w-4 h-4 text-slate-400 shrink-0" />
+                  <div className="flex items-center gap-2 text-zinc-500">
+                    <Building2 className="w-4 h-4 text-zinc-600 shrink-0" />
                     <span>{ptn.alamat}</span>
                   </div>
                 )}
@@ -172,20 +166,20 @@ export default function PTNDetailPage({ params }: { params: Promise<{ id: string
               <button
                 type="button"
                 onClick={() => toggleCompare(ptn, jalur)}
-                className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition-all flex items-center gap-2 ${
+                className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 active:scale-95 ${
                   comparing
-                    ? "bg-emerald-50 border-emerald-300 text-emerald-700"
-                    : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
+                    ? "bg-white text-black border-white shadow-md"
+                    : "bg-black border-zinc-800 text-white hover:border-zinc-700"
                 }`}
               >
                 {comparing ? (
                   <>
-                    <Check className="w-4 h-4 text-emerald-600" />
+                    <Check className="w-4 h-4 text-black stroke-[2.5]" />
                     <span>Dalam Komparasi</span>
                   </>
                 ) : (
                   <>
-                    <Scale className="w-4 h-4 text-slate-500" />
+                    <Scale className="w-4 h-4 text-white" />
                     <span>Bandingkan PTN</span>
                   </>
                 )}
@@ -195,32 +189,32 @@ export default function PTNDetailPage({ params }: { params: Promise<{ id: string
         </div>
 
         {/* Track Switcher Bar */}
-        <div className="border-t border-slate-100 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="text-xs font-semibold text-slate-500">
+        <div className="border-t border-zinc-900 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
             Jalur Seleksi Aktif:
           </div>
 
-          <div className="flex items-center gap-2 p-1 bg-slate-100/90 rounded-xl self-start sm:self-auto">
+          <div className="flex items-center gap-2 p-1 bg-black rounded-xl border border-zinc-800 self-start sm:self-auto">
             <button
               onClick={() => handleJalurChange("snbp")}
-              className={`px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-mono font-bold transition-all flex items-center gap-2 ${
                 jalur === "snbp"
-                  ? "bg-blue-600 text-white shadow-xs"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white text-black shadow-sm"
+                  : "text-zinc-400 hover:text-white"
               }`}
             >
-              <School className="w-3.5 h-3.5" />
+              <School className="w-4 h-4" />
               <span>Jalur SNBP</span>
             </button>
             <button
               onClick={() => handleJalurChange("snbt")}
-              className={`px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-mono font-bold transition-all flex items-center gap-2 ${
                 jalur === "snbt"
-                  ? "bg-emerald-600 text-white shadow-xs"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white text-black shadow-sm"
+                  : "text-zinc-400 hover:text-white"
               }`}
             >
-              <BookOpen className="w-3.5 h-3.5" />
+              <BookOpen className="w-4 h-4" />
               <span>Jalur SNBT</span>
             </button>
           </div>
@@ -232,17 +226,17 @@ export default function PTNDetailPage({ params }: { params: Promise<{ id: string
 
       {/* Program Study Section */}
       {isLoading ? (
-        <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center space-y-3">
-          <RefreshCw className="w-6 h-6 animate-spin text-blue-600 mx-auto" />
-          <p className="text-xs sm:text-sm text-slate-500 font-medium">
+        <div className="bg-zinc-950 rounded-2xl border border-zinc-800 p-12 text-center space-y-3">
+          <RefreshCw className="w-6 h-6 animate-spin text-white mx-auto" />
+          <p className="text-xs sm:text-sm text-zinc-400 font-mono">
             Memuat daftar program studi...
           </p>
         </div>
       ) : error ? (
-        <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center space-y-3">
-          <AlertCircle className="w-6 h-6 text-red-600 mx-auto" />
-          <h3 className="font-bold text-red-900 text-base">Gagal Memuat Program Studi</h3>
-          <p className="text-xs text-red-700 max-w-md mx-auto">{error}</p>
+        <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-8 text-center space-y-3">
+          <AlertCircle className="w-6 h-6 text-white mx-auto" />
+          <h3 className="font-bold text-white text-base">Gagal Memuat Program Studi</h3>
+          <p className="text-xs text-zinc-400 max-w-md mx-auto">{error}</p>
         </div>
       ) : (
         <ProdiList

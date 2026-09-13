@@ -24,26 +24,26 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+    <header className="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-zinc-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
-              <GraduationCap className="w-6 h-6" />
+          <Link href="/" className="flex items-center gap-3 group focus:outline-none">
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-black shadow-md font-bold group-hover:scale-105 transition-transform">
+              <GraduationCap className="w-6 h-6 stroke-[2.5]" />
             </div>
             <div>
-              <span className="font-bold text-lg text-slate-900 tracking-tight block leading-none">
-                SNPMB<span className="text-blue-600">Explorer</span>
+              <span className="font-extrabold text-lg text-white tracking-tight block leading-none">
+                B-SNPMB<span className="text-zinc-400"> EXPLORER</span>
               </span>
-              <span className="text-[10px] text-slate-500 font-medium tracking-wide">
-                Data PTN Indonesia
+              <span className="text-[10px] text-zinc-400 font-mono tracking-widest uppercase">
+                BETTER SNPMB DATA EXPLORER
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1.5">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive =
@@ -54,16 +54,20 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-1.5 ${
+                  className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 border ${
                     isActive
-                      ? "bg-blue-50 text-blue-700 font-semibold"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                      ? "bg-white text-black border-white shadow-sm"
+                      : "text-zinc-300 hover:text-white border-transparent hover:border-zinc-800 hover:bg-zinc-900"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span>{link.label}</span>
                   {link.badge !== undefined && (
-                    <span className="ml-1 px-1.5 py-0.5 text-xs font-bold bg-blue-600 text-white rounded-full">
+                    <span
+                      className={`ml-1 px-1.5 py-0.5 text-xs font-mono font-bold rounded-full ${
+                        isActive ? "bg-black text-white" : "bg-white text-black"
+                      }`}
+                    >
                       {link.badge}
                     </span>
                   )}
@@ -76,7 +80,7 @@ export function Header() {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-none"
+              className="p-2.5 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-900 border border-zinc-800 transition-colors focus:outline-none active:scale-95"
               aria-label="Buka Menu Navigation"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -87,7 +91,7 @@ export function Header() {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg animate-in slide-in-from-top-2">
+        <div className="md:hidden border-t border-zinc-800 bg-black/95 backdrop-blur-2xl px-4 pt-3 pb-6 space-y-2 shadow-2xl animate-in slide-in-from-top-2">
           {navLinks.map((link) => {
             const Icon = link.icon;
             const isActive =
@@ -99,10 +103,10 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`w-full px-4 py-3 rounded-xl text-base font-medium transition-colors flex items-center justify-between ${
+                className={`w-full px-4 py-3.5 rounded-xl text-base font-semibold transition-all flex items-center justify-between border ${
                   isActive
-                    ? "bg-blue-600 text-white font-semibold shadow-sm"
-                    : "text-slate-700 hover:bg-slate-100"
+                    ? "bg-white text-black border-white shadow-md"
+                    : "text-zinc-300 hover:bg-zinc-900 border-zinc-800/60"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -111,8 +115,8 @@ export function Header() {
                 </div>
                 {link.badge !== undefined && (
                   <span
-                    className={`px-2 py-0.5 text-xs font-bold rounded-full ${
-                      isActive ? "bg-white text-blue-600" : "bg-blue-600 text-white"
+                    className={`px-2.5 py-0.5 text-xs font-mono font-bold rounded-full ${
+                      isActive ? "bg-black text-white" : "bg-white text-black"
                     }`}
                   >
                     {link.badge}

@@ -1,4 +1,4 @@
-"""FastAPI backend & CLI entrypoint for SNBP and SNBT university admission data."""
+"""FastAPI backend & CLI entrypoint for Better SNPMB Data Explorer (B-SNPMB)."""
 
 import time
 from collections import defaultdict
@@ -12,8 +12,8 @@ from fastapi.responses import JSONResponse
 from src.routes import router
 
 app = FastAPI(
-    title="UnivScrap API",
-    description="Indonesian University Admission (SNPMB) Data Service",
+    title="Better SNPMB Data Explorer API",
+    description="Better SNPMB Data Explorer (B-SNPMB) Backend Service",
     version="1.0.0",
 )
 

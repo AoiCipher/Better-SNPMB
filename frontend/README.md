@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Better SNPMB Data Explorer — Frontend (B-SNPMB Frontend)
 
-## Getting Started
+Modern Next.js web application for exploring, filtering, comparing, and analyzing Indonesian State University Admission (SNBP and SNBT) data.
 
-First, run the development server:
+## File Tree & Architecture
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```text
+frontend/
+├── package.json                 # Project dependencies, scripts, and package metadata
+├── next.config.ts               # Next.js configuration settings
+├── tsconfig.json                # TypeScript compiler configuration
+├── postcss.config.mjs           # PostCSS configuration for Tailwind CSS v4
+├── README.md                    # Frontend documentation and file architecture
+├── src/
+│   ├── app/                     # Next.js App Router pages and layout handlers
+│   │   ├── layout.tsx           # Global root layout with header, main area, & footer
+│   │   ├── page.tsx             # Homepage with landing stats and search entrypoints
+│   │   ├── globals.css          # Global styling & Tailwind directives
+│   │   ├── search/              # Search & filter view for SNBP and SNBT pathways
+│   │   ├── ptn/[id]/            # University detail view & study program lists
+│   │   └── compare/             # Side-by-side study program comparison page
+│   ├── components/              # Modular UI components
+│   │   ├── layout/              # Header, Footer, and DisclaimerAlert components
+│   │   ├── ptn/                 # PTN list cards, Prodi tables, and filter bars
+│   │   └── ui/                  # Reusable UI primitives (badges, buttons, inputs)
+│   ├── hooks/                   # Custom React hooks
+│   │   ├── useCompare.ts        # LocalStorage state manager for study program comparison
+│   │   └── useSearchState.ts    # URL query parameter sync and filter management
+│   ├── utils/                   # Helper functions
+│   │   ├── formatters.ts        # Data formatting, percentages, and string helpers
+│   │   └── exportExcel.ts       # XLSX workbook generator for downloading dataset exports
+│   └── types/                   # TypeScript interfaces (PTN, Prodi, FilterTypes)
+└── public/                      # Static assets and favicons
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Key Views & Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **`src/app/page.tsx`**: Homepage containing application statistics, search entrypoints, and standard disclaimer notice.
+- **`src/app/search/`**: Interactive search and filtering page supporting province, city, and pathway filters.
+- **`src/app/ptn/[id]/`**: University detail page displaying study program statistics, historical applicant trends, and competition ratios.
+- **`src/app/compare/`**: Side-by-side comparison page for up to 4 study programs.
+- **`src/components/layout/DisclaimerAlert.tsx`**: Dedicated disclaimer notice component presented across all primary views.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup & Running
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+
+- npm (or pnpm / yarn / bun)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Environment Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copy `.env.example` to `.env` before running the development server:
 
-## Deploy on Vercel
+```bash
+cp .env.example .env # Or `copy .env.example .env` on Windows
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Variable | Default | Description |
+| :--- | :--- | :--- |
+| `NEXT_PUBLIC_API_BASE_URL` | `http://127.0.0.1:8000` | Backend API base URL for REST API calls |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Development Server
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The web application runs locally at `http://localhost:3000`.
+
+### Production Build
+
+```bash
+npm run build
+npm run start
+```
+
+## Disclaimer
+
+Better SNPMB Data Explorer (B-SNPMB) is an independent open-source project and is **not** affiliated with, authorized, maintained, sponsored, or endorsed by SNPMB (Seleksi Nasional Penerimaan Mahasiswa Baru), BP3, or the Ministry of Education, Culture, Research, and Technology of Indonesia. All data displayed on this website is obtained from public API endpoints for exploratory and educational purposes only. Always verify official admission statistics directly at the [official SNPMB portal](https://snpmb.bppp.kemdikbud.go.id).

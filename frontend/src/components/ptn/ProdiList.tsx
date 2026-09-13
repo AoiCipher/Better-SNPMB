@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, Download, ArrowUpDown, Filter, Eye, Award } from "lucide-react";
+import { Search, Download, ArrowUpDown, Filter, Eye } from "lucide-react";
 import { Prodi } from "@/types";
 import { formatNumber, formatPercent, getChanceBadgeColor } from "@/utils/formatters";
 import { exportProdiToExcel } from "@/utils/export";
@@ -46,32 +46,32 @@ export function ProdiList({ prodiList, ptnName, jalur, onSelectProdi }: ProdiLis
   return (
     <div className="space-y-4">
       {/* Control Bar: Search, Jenjang Filter, Sort, Export */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs space-y-3">
+      <div className="bg-zinc-950 rounded-2xl border border-zinc-800 p-4 shadow-md space-y-3">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           {/* Search Input */}
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Cari nama program studi..."
-              className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all placeholder:text-slate-400"
+              className="w-full pl-10 pr-3 py-2.5 bg-black border border-zinc-800 rounded-xl text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-all"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
             {/* Jenjang Filter */}
-            <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs text-slate-700">
-              <Filter className="w-3.5 h-3.5 text-slate-400" />
+            <div className="flex items-center gap-1.5 bg-black border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white">
+              <Filter className="w-3.5 h-3.5 text-zinc-400" />
               <select
                 value={selectedJenjang}
                 onChange={(e) => setSelectedJenjang(e.target.value)}
-                className="bg-transparent font-medium focus:outline-none cursor-pointer"
+                className="bg-black text-white font-mono font-bold focus:outline-none cursor-pointer text-xs"
               >
                 <option value="all">Semua Jenjang</option>
                 {jenjangOptions.map((j) => (
-                  <option key={j} value={j}>
+                  <option key={j} value={j} className="bg-zinc-900 text-white">
                     {j}
                   </option>
                 ))}
@@ -79,16 +79,16 @@ export function ProdiList({ prodiList, ptnName, jalur, onSelectProdi }: ProdiLis
             </div>
 
             {/* Sort Select */}
-            <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs text-slate-700">
-              <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+            <div className="flex items-center gap-1.5 bg-black border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white">
+              <ArrowUpDown className="w-3.5 h-3.5 text-zinc-400" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-transparent font-medium focus:outline-none cursor-pointer"
+                className="bg-black text-white font-mono font-bold focus:outline-none cursor-pointer text-xs"
               >
-                <option value="capacity">Daya Tampung (Tinggi → Rendah)</option>
-                <option value="chance5yr">Peluang 5 Thn (Tinggi → Rendah)</option>
-                <option value="name">Nama Prodi (A → Z)</option>
+                <option value="capacity" className="bg-zinc-900 text-white">Daya Tampung (Tinggi → Rendah)</option>
+                <option value="chance5yr" className="bg-zinc-900 text-white">Peluang 5 Thn (Tinggi → Rendah)</option>
+                <option value="name" className="bg-zinc-900 text-white">Nama Prodi (A → Z)</option>
               </select>
             </div>
 
@@ -96,7 +96,7 @@ export function ProdiList({ prodiList, ptnName, jalur, onSelectProdi }: ProdiLis
             <button
               onClick={handleExport}
               disabled={filteredList.length === 0}
-              className="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold transition-colors flex items-center gap-1.5 disabled:opacity-50"
+              className="px-4 py-2 bg-white hover:bg-zinc-200 text-black rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 disabled:opacity-50 active:scale-95"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Ekspor (.xlsx)</span>
@@ -104,15 +104,15 @@ export function ProdiList({ prodiList, ptnName, jalur, onSelectProdi }: ProdiLis
           </div>
         </div>
 
-        <div className="text-xs text-slate-500 font-medium pt-1">
-          Menampilkan <strong className="text-blue-600">{filteredList.length}</strong> dari total{" "}
+        <div className="text-xs text-zinc-400 font-mono pt-1">
+          Menampilkan <strong className="text-white underline underline-offset-2">{filteredList.length}</strong> dari total{" "}
           {prodiList.length} program studi
         </div>
       </div>
 
-      {/* Program Study Cards / Table */}
+      {/* Program Study Cards */}
       {filteredList.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center text-xs sm:text-sm text-slate-500">
+        <div className="bg-zinc-950 rounded-2xl border border-zinc-800 p-8 text-center text-xs sm:text-sm text-zinc-400 font-mono">
           Tidak ada program studi yang cocok dengan kata kunci pencarian.
         </div>
       ) : (
@@ -126,15 +126,15 @@ export function ProdiList({ prodiList, ptnName, jalur, onSelectProdi }: ProdiLis
             return (
               <div
                 key={prodi.id_prodi}
-                className="bg-white rounded-2xl border border-slate-200 p-4 hover:border-blue-400 hover:shadow-md transition-all flex flex-col justify-between space-y-3 group"
+                className="bg-zinc-950 rounded-2xl border border-zinc-800 p-4 hover:border-white transition-all flex flex-col justify-between space-y-3 group shadow-md"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-extrabold border border-blue-100">
+                    <span className="px-2.5 py-0.5 rounded-md bg-white text-black text-[10px] font-mono font-bold">
                       {prodi.jenjang}
                     </span>
                     <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${getChanceBadgeColor(
+                      className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border ${getChanceBadgeColor(
                         prodi.chance_5_year
                       )}`}
                     >
@@ -142,33 +142,33 @@ export function ProdiList({ prodiList, ptnName, jalur, onSelectProdi }: ProdiLis
                     </span>
                   </div>
 
-                  <h3 className="font-bold text-sm sm:text-base text-slate-900 leading-snug group-hover:text-blue-600 transition-colors">
+                  <h3 className="font-extrabold text-sm sm:text-base text-white leading-snug group-hover:text-zinc-300 transition-colors">
                     {prodi.nama}
                   </h3>
 
                   {prodi.nama_portofolio && (
-                    <div className="text-[11px] text-amber-700 bg-amber-50 px-2 py-1 rounded-md border border-amber-200/60 inline-block font-medium">
+                    <div className="text-[11px] font-mono text-zinc-300 bg-zinc-900 px-2.5 py-1 rounded-md border border-zinc-800 inline-block font-semibold">
                       Portofolio: {prodi.nama_portofolio}
                     </div>
                   )}
                 </div>
 
                 {/* Metrics Footer */}
-                <div className="space-y-3 pt-3 border-t border-slate-100">
-                  <div className="grid grid-cols-3 gap-1 text-center text-xs bg-slate-50 p-2 rounded-xl">
+                <div className="space-y-3 pt-3 border-t border-zinc-900">
+                  <div className="grid grid-cols-3 gap-1 text-center text-xs bg-black border border-zinc-800 p-2 rounded-xl">
                     <div>
-                      <div className="text-[10px] text-slate-400 font-medium">Daya Tampung</div>
-                      <div className="font-bold text-slate-900">{formatNumber(prodi.daya_tampung)}</div>
+                      <div className="text-[10px] text-zinc-500 font-mono">Daya Tampung</div>
+                      <div className="font-bold text-white">{formatNumber(prodi.daya_tampung)}</div>
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 font-medium">Peminat Terbaru</div>
-                      <div className="font-bold text-slate-900">
+                      <div className="text-[10px] text-zinc-500 font-mono">Peminat Terbaru</div>
+                      <div className="font-bold text-white">
                         {latestHistory ? formatNumber(latestHistory.peminat) : "-"}
                       </div>
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 font-medium">Diterima Terbaru</div>
-                      <div className="font-bold text-emerald-700">
+                      <div className="text-[10px] text-zinc-500 font-mono">Diterima Terbaru</div>
+                      <div className="font-bold text-zinc-200">
                         {latestHistory ? formatNumber(latestHistory.terima) : "-"}
                       </div>
                     </div>
@@ -176,9 +176,9 @@ export function ProdiList({ prodiList, ptnName, jalur, onSelectProdi }: ProdiLis
 
                   <button
                     onClick={() => onSelectProdi(prodi)}
-                    className="w-full py-2 bg-slate-900 hover:bg-blue-600 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+                    className="w-full py-2.5 bg-white hover:bg-zinc-200 text-black rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 active:scale-98"
                   >
-                    <Eye className="w-3.5 h-3.5" />
+                    <Eye className="w-4 h-4 stroke-[2.2]" />
                     <span>Detail & Grafik Histori</span>
                   </button>
                 </div>

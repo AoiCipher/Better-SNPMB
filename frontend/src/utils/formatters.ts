@@ -18,10 +18,10 @@ export function capitalizeWords(str: string | null | undefined): string {
 }
 
 export function getChanceBadgeColor(chance: number): string {
-  if (chance <= 5) return "bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300 border-red-200";
-  if (chance <= 15) return "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border-amber-200";
-  if (chance <= 30) return "bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 border-blue-200";
-  return "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-200";
+  if (chance <= 5) return "bg-black text-white border-white";
+  if (chance <= 15) return "bg-zinc-900 text-zinc-200 border-zinc-700";
+  if (chance <= 30) return "bg-zinc-950 text-zinc-300 border-zinc-800";
+  return "bg-white text-black border-white";
 }
 
 export function getChanceDescription(chance: number): string {

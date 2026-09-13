@@ -1,0 +1,47 @@
+# Environment & Secret files
+.env
+.env*.local
+.env.production
+.env.development
+!.env.example
+!/**/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Node & Next.js
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+next-env.d.ts
+
+# Generated data files
+backend/univinfo.json
+standalone/univinfo.json
+
+# Tooling & Editor
+.opencode/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

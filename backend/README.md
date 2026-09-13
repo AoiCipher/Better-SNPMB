@@ -1,56 +1,63 @@
-# UnivScrap
+# Better SNPMB Data Explorer — Backend (B-SNPMB Backend)
 
-Async scraper & FastAPI backend for Indonesian University Admission (SNPMB) SNBP and SNBT data.
+FastAPI REST service and asynchronous scraper engine for Indonesian State University Admission (SNBP and SNBT) datasets.
 
-## Features
+## File Tree & Architecture
 
-- **FastAPI Backend**: Serves SNBP & SNBT data with filtering and rate limiting.
-- **Async Scraper**: Concurrent data fetching using `aiohttp`.
-- **Data Cleaners**: Calculates 5-year acceptance rates and cleans up university & study program data.
-
-## Installation
-
-Requires Python 3.10+ and [uv](https://docs.astral.sh/uv/).
-
-```bash
-uv sync
+```text
+backend/
+├── main.py                   # FastAPI app entrypoint, middleware, and CORS configuration
+├── pyproject.toml            # Project dependencies, build config, and script entrypoints
+├── univinfo.json             # Pre-cached university metadata (names, locations, codes)
+├── README.md                 # Backend documentation and file structure
+├── src/
+│   ├── __init__.py           # Package initialization
+│   ├── cleaner.py            # Data transformations, 5-year statistics, & schema normalization
+│   ├── fetcher.py            # Async HTTP client (aiohttp) with memory/disk caching
+│   └── routes.py             # API route handlers (/health, /snbp, /snbt)
+└── tests/
+    └── test_backend.py       # Pytest unit and integration test suite
 ```
 
-## Usage
+### Module Descriptions
 
-### Run API Server
+- **`main.py`**: Initializes the FastAPI application for Better SNPMB Data Explorer API (`title="Better SNPMB Data Explorer API"`), configures CORS middleware, and enforces client IP rate limiting (5 requests per second).
+- **`src/fetcher.py`**: Implements asynchronous HTTP requests to official/proxy SNPMB data endpoints. Features concurrent fetching and local JSON caching.
+- **`src/cleaner.py`**: Cleans raw JSON responses, normalizes field names, calculates acceptance rates, 5-year historical trends, and provincial statistics.
+- **`src/routes.py`**: Defines RESTful endpoints supporting filtering by province (`provinsi`), city (`kota`), and university code (`ptn`).
+- **`tests/test_backend.py`**: Automated test suite for health checks, route parameters, rate limiter behavior, and data cleaning routines.
+
+## Installation & Setup
+
+### Prerequisites
+
+- Python 3.10+
+- [uv](https://docs.astral.sh/uv/) package manager
+
+### Running the Server
 
 ```bash
-uv run univscrap
-# or
+cd backend
+uv sync
 uv run uvicorn main:app --reload
 ```
 
-Server starts at `http://localhost:8000`.
+The API server runs at `http://localhost:8000`. OpenAPI documentation is available at `http://localhost:8000/docs`.
 
-### API Endpoints
-
-- `GET /health`: Health check endpoint.
-- `GET /snbp`: Fetch SNBP universities or program details.
-  - Query parameters: `provinsi`, `kota`, `ptn`
-- `GET /snbt`: Fetch SNBT universities or program details.
-  - Query parameters: `provinsi`, `kota`, `ptn`
-
-### Python Library Usage
-
-```python
-import asyncio
-from src.fetcher import fetch_prodi, fetch_ptns
-
-# Fetch all SNBP universities
-ptns = asyncio.run(fetch_ptns(is_snbp=True))
-
-# Fetch study programs for a specific university
-prodi = asyncio.run(fetch_prodi("https://snpmb.id/proxy-prodi-sn.php?ptn=355", is_snbp=True))
-```
-
-## Testing
+### Running Tests
 
 ```bash
 uv run pytest
 ```
+
+## API Endpoints Reference
+
+| Method | Route | Description | Query Parameters |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/health` | Service health status | None |
+| `GET` | `/snbp` | SNBP pathway university data | `provinsi`, `kota`, `ptn` |
+| `GET` | `/snbt` | SNBT pathway university data | `provinsi`, `kota`, `ptn` |
+
+## Disclaimer
+
+Better SNPMB Data Explorer (B-SNPMB) is an independent open-source project and is **not** affiliated with, authorized, maintained, sponsored, or endorsed by SNPMB (Seleksi Nasional Penerimaan Mahasiswa Baru), BP3, or the Ministry of Education, Culture, Research, and Technology of Indonesia. All data is fetched from public endpoints for exploratory and educational purposes only. Always verify official admission statistics at the [official SNPMB portal](https://snpmb.bppp.kemdikbud.go.id).
