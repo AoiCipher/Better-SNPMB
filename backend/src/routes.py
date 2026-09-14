@@ -1,6 +1,6 @@
 """API routes for university admission data endpoints."""
 
-from typing import Annotated
+from typing import Annotated, Any
 
 from fastapi import APIRouter, Query
 
@@ -17,10 +17,10 @@ async def health_check() -> dict[str, str]:
 
 @router.get("/snbp")
 async def get_snbp(
-    provinsi: Annotated[str | None, Query()] = None,
-    kota: Annotated[str | None, Query()] = None,
-    ptn: Annotated[str | None, Query()] = None,
-) -> list[dict[str, object]]:
+    provinsi: Annotated[str | None, Query(max_length=100)] = None,
+    kota: Annotated[str | None, Query(max_length=100)] = None,
+    ptn: Annotated[str | None, Query(max_length=100)] = None,
+) -> list[dict[str, Any]]:
     if ptn is not None:
         c_ptn = clean_query(str(ptn))
         if not c_ptn:
@@ -31,10 +31,10 @@ async def get_snbp(
 
 @router.get("/snbt")
 async def get_snbt(
-    provinsi: Annotated[str | None, Query()] = None,
-    kota: Annotated[str | None, Query()] = None,
-    ptn: Annotated[str | None, Query()] = None,
-) -> list[dict[str, object]]:
+    provinsi: Annotated[str | None, Query(max_length=100)] = None,
+    kota: Annotated[str | None, Query(max_length=100)] = None,
+    ptn: Annotated[str | None, Query(max_length=100)] = None,
+) -> list[dict[str, Any]]:
     if ptn is not None:
         c_ptn = clean_query(str(ptn))
         if not c_ptn:

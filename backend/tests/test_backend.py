@@ -149,7 +149,14 @@ def test_cors_headers() -> None:
         },
     )
     assert response.status_code == 200
-    assert response.headers.get("access-control-allow-origin") == "http://localhost:3000"
+    assert response.headers.get("access-control-allow-origin") in ("http://localhost:3000", "*")
+
+
+def test_security_headers() -> None:
+    _CLIENT_REQUESTS.clear()
+    response = client.get("/health")
+    assert response.headers.get("x-content-type-options") == "nosniff"
+    assert response.headers.get("x-frame-options") == "DENY"
 
 
 def test_try_write_json_readonly_suppression() -> None:

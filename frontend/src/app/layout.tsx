@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CompareProvider } from "@/hooks/useCompare";
+import { CompareBar } from "@/components/explorer/CompareBar";
 
 export const metadata: Metadata = {
   title: "Better SNPMB Data Explorer (B-SNPMB)",
@@ -17,11 +19,14 @@ export default function RootLayout({
   return (
     <html lang="id" className="h-full dark">
       <body className="min-h-screen flex flex-col antialiased bg-black text-white selection:bg-white selection:text-black">
-        <Header />
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-          {children}
-        </main>
-        <Footer />
+        <CompareProvider>
+          <Header />
+          <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            {children}
+          </main>
+          <Footer />
+          <CompareBar />
+        </CompareProvider>
       </body>
     </html>
   );

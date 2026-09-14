@@ -78,7 +78,7 @@ export function Footer() {
             </p>
             <div className="pt-1">
               <a
-                href="https://snpmb.id/snbp/daya-tampung-snbp"
+                href="https://snpmb.id/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs text-white hover:text-zinc-300 flex items-center gap-1 font-semibold underline underline-offset-4"

@@ -6,7 +6,6 @@ import { fetchPTNs } from "@/api/client";
 import { FilterBar } from "@/components/explorer/FilterBar";
 import { PTNCard } from "@/components/explorer/PTNCard";
 import { PTNTable } from "@/components/explorer/PTNTable";
-import { CompareBar } from "@/components/explorer/CompareBar";
 import { DisclaimerAlert } from "@/components/layout/DisclaimerAlert";
 import { useSearchState } from "@/hooks/useSearchState";
 import { useCompare } from "@/hooks/useCompare";
@@ -223,9 +222,6 @@ function SearchExplorerContent() {
           onToggleCompare={toggleCompare}
         />
       )}
-
-      {/* Floating Compare Bar */}
-      <CompareBar />
     </div>
   );
 }

@@ -22,9 +22,9 @@ export default function ApiDocsPage() {
       title: "Health Check",
       desc: "Memeriksa status dan kesehatan server API.",
       params: [],
-      exampleUrl: `${baseUrl}/health`,
-      curl: `curl -X GET "${baseUrl}/health"`,
-      js: `fetch("${baseUrl}/health")\n  .then(res => res.json())\n  .then(data => console.log(data));`,
+      exampleUrl: `${baseUrl}health`,
+      curl: `curl -X GET "${baseUrl}health"`,
+      js: `fetch("${baseUrl}health")\n  .then(res => res.json())\n  .then(data => console.log(data));`,
       response: `{\n  "status": "ok"\n}`,
     },
     {
@@ -38,9 +38,9 @@ export default function ApiDocsPage() {
         { name: "kota", type: "string", required: false, desc: "Filter berdasarkan nama kota/kabupaten (contoh: BANDUNG)" },
         { name: "ptn", type: "string", required: false, desc: "Kode/ID PTN untuk mengambil daftar prodi (contoh: 332)" },
       ],
-      exampleUrl: `${baseUrl}/snbp?provinsi=JAWA%20BARAT`,
-      curl: `curl -X GET "${baseUrl}/snbp?provinsi=JAWA%20BARAT"`,
-      js: `fetch("${baseUrl}/snbp?provinsi=JAWA%20BARAT")\n  .then(res => res.json())\n  .then(data => console.log(data));`,
+      exampleUrl: `${baseUrl}snbp?provinsi=JAWA%20BARAT`,
+      curl: `curl -X GET "${baseUrl}snbp?provinsi=JAWA%20BARAT"`,
+      js: `fetch("${baseUrl}snbp?provinsi=JAWA%20BARAT")\n  .then(res => res.json())\n  .then(data => console.log(data));`,
       response: `[\n  {\n    "code": "332",\n    "name": "INSTITUT TEKNOLOGI BANDUNG",\n    "provinsi": "JAWA BARAT",\n    "kota": "KOTA BANDUNG"\n  }\n]`,
     },
     {
@@ -54,9 +54,9 @@ export default function ApiDocsPage() {
         { name: "kota", type: "string", required: false, desc: "Filter berdasarkan nama kota/kabupaten" },
         { name: "ptn", type: "string", required: false, desc: "Kode/ID PTN untuk mengambil daftar prodi" },
       ],
-      exampleUrl: `${baseUrl}/snbt?ptn=332`,
-      curl: `curl -X GET "${baseUrl}/snbt?ptn=332"`,
-      js: `fetch("${baseUrl}/snbt?ptn=332")\n  .then(res => res.json())\n  .then(data => console.log(data));`,
+      exampleUrl: `${baseUrl}snbt?ptn=332`,
+      curl: `curl -X GET "${baseUrl}snbt?ptn=332"`,
+      js: `fetch("${baseUrl}snbt?ptn=332")\n  .then(res => res.json())\n  .then(data => console.log(data));`,
       response: `[\n  {\n    "code": "3321014",\n    "name": "TEKNIK INFORMATIKA",\n    "jenjang": "S1",\n    "kuota": 80,\n    "peminat": 2500\n  }\n]`,
     },
   ];
@@ -64,7 +64,7 @@ export default function ApiDocsPage() {
   return (
     <div className="min-h-screen bg-black text-white py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto space-y-10">
-        
+
         {/* Header Section */}
         <div className="space-y-4 text-center sm:text-left border-b border-zinc-800 pb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold border border-emerald-500/20">
@@ -116,7 +116,7 @@ export default function ApiDocsPage() {
 
           {endpoints.map((ep) => (
             <div key={ep.id} className="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-6 space-y-6">
-              
+
               {/* Endpoint Header */}
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800/80 pb-4">
                 <div className="flex items-center gap-3">

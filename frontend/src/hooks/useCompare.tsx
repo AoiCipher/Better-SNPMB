@@ -1,11 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { Jalur, PTN } from "@/types";
 
 export interface CompareItem {
   ptn: PTN;
   jalur: Jalur;
+}
+
+interface CompareContextType {
+  compareList: CompareItem[];
+  isLoaded: boolean;
+  toggleCompare: (ptn: PTN, jalur: Jalur) => boolean;
+  isComparing: (ptnId: number) => boolean;
+  removeFromCompare: (ptnId: number) => void;
+  clearCompare: () => void;
 }
 
 const STORAGE_KEY = "better_snpmb_compare_list";
@@ -32,11 +41,13 @@ function normalizeItem(rawItem: any): CompareItem | null {
   return null;
 }
 
-export function useCompare() {
+const CompareContext = createContext<CompareContextType | null>(null);
+
+export function CompareProvider({ children }: { children: ReactNode }) {
   const [compareList, setCompareList] = useState<CompareItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
+  const loadFromStorage = () => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -45,17 +56,30 @@ export function useCompare() {
           const valid: CompareItem[] = parsed
             .map(normalizeItem)
             .filter((item): item is CompareItem => item !== null);
-
           setCompareList(valid);
-          // Sync clean data back to storage
           localStorage.setItem(STORAGE_KEY, JSON.stringify(valid));
+          return;
         }
       }
+      setCompareList([]);
     } catch {
-      // Ignore storage errors
+      setCompareList([]);
     } finally {
       setIsLoaded(true);
     }
+  };
+
+  useEffect(() => {
+    loadFromStorage();
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY) {
+        loadFromStorage();
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   const saveList = (newList: CompareItem[]) => {
@@ -74,14 +98,11 @@ export function useCompare() {
     const existingIndex = compareList.findIndex((item) => item?.ptn?.id_ptn === ptn.id_ptn);
 
     if (existingIndex >= 0) {
-      // Remove item
       const newList = compareList.filter((item) => item?.ptn?.id_ptn !== ptn.id_ptn);
       saveList(newList);
       return false;
     } else {
-      // Add item (max 2)
       if (compareList.length >= 2) {
-        // Replace second
         const newList = [compareList[0], { ptn, jalur }];
         saveList(newList);
         return true;
@@ -108,12 +129,26 @@ export function useCompare() {
     saveList([]);
   };
 
-  return {
-    compareList,
-    isLoaded,
-    toggleCompare,
-    isComparing,
-    removeFromCompare,
-    clearCompare,
-  };
+  return (
+    <CompareContext.Provider
+      value={{
+        compareList,
+        isLoaded,
+        toggleCompare,
+        isComparing,
+        removeFromCompare,
+        clearCompare,
+      }}
+    >
+      {children}
+    </CompareContext.Provider>
+  );
+}
+
+export function useCompare() {
+  const context = useContext(CompareContext);
+  if (!context) {
+    throw new Error("useCompare must be used within a CompareProvider");
+  }
+  return context;
 }

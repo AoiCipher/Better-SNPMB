@@ -22,6 +22,9 @@ COPY --from=frontend-builder /app/frontend ./frontend
 COPY entrypoint.sh ./
 RUN chmod +x entrypoint.sh
 
+RUN useradd -m -s /bin/bash appuser && chown -R appuser:appuser /app
+USER appuser
+
 EXPOSE 8000 3000
 
 CMD ["./entrypoint.sh"]
