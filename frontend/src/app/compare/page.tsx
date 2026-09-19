@@ -196,7 +196,7 @@ export default function ComparePage() {
 
   if (!isLoaded) {
     return (
-      <div className="p-12 text-center text-zinc-400 font-mono text-sm">
+      <div className="p-12 text-center text-slate-500 dark:text-zinc-400 font-mono text-sm">
         Memuat data komparasi...
       </div>
     );
@@ -207,14 +207,14 @@ export default function ComparePage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-400">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-500 dark:text-zinc-400">
             HEAD-TO-HEAD ANALYTICS
           </span>
-          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight flex items-center gap-2.5">
-            <Scale className="w-8 h-8 text-white stroke-[2.5]" />
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
+            <Scale className="w-8 h-8 text-slate-900 dark:text-white stroke-[2.5]" />
             <span>Komparasi Perguruan Tinggi Negeri</span>
           </h1>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 mt-1">
             Bandingkan parameter daya tampung, ketetatan peluang, serta program studi antar PTN secara komprehensif.
           </p>
         </div>
@@ -223,7 +223,7 @@ export default function ComparePage() {
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={handleExportExcel}
-              className="px-4 py-2.5 bg-zinc-900 border border-zinc-700 hover:border-white text-white rounded-xl text-xs font-bold transition-colors flex items-center gap-2"
+              className="px-4 py-2.5 bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 hover:border-slate-400 dark:hover:border-white text-slate-900 dark:text-white rounded-xl text-xs font-bold transition-colors flex items-center gap-2 shadow-sm"
             >
               <Download className="w-4 h-4" />
               <span>Export Excel</span>
@@ -231,7 +231,7 @@ export default function ComparePage() {
 
             <button
               onClick={clearCompare}
-              className="px-4 py-2.5 bg-red-950/40 border border-red-800/60 hover:bg-red-900/40 text-red-300 rounded-xl text-xs font-bold transition-colors flex items-center gap-2"
+              className="px-4 py-2.5 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/60 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-600 dark:text-red-300 rounded-xl text-xs font-bold transition-colors flex items-center gap-2"
             >
               <X className="w-4 h-4" />
               <span>Bersihkan</span>
@@ -243,19 +243,19 @@ export default function ComparePage() {
       <DisclaimerAlert />
 
       {compareList.length === 0 ? (
-        <div className="bg-zinc-950 rounded-3xl border border-zinc-800 p-12 text-center space-y-4 shadow-xl">
-          <div className="w-16 h-16 rounded-2xl bg-zinc-900 border border-zinc-800 text-zinc-400 flex items-center justify-center mx-auto">
+        <div className="bg-white dark:bg-zinc-950 rounded-3xl border border-slate-200/80 dark:border-zinc-800 p-12 text-center space-y-4 shadow-xl transition-colors">
+          <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 flex items-center justify-center mx-auto">
             <Scale className="w-8 h-8" />
           </div>
           <div>
-            <h3 className="font-extrabold text-xl text-white">Belum Ada PTN Dipilih</h3>
-            <p className="text-xs text-zinc-400 max-w-md mx-auto mt-1">
+            <h3 className="font-extrabold text-xl text-slate-900 dark:text-white">Belum Ada PTN Dipilih</h3>
+            <p className="text-xs text-slate-600 dark:text-zinc-400 max-w-md mx-auto mt-1">
               Pilih hingga 2 PTN dari halaman pencarian untuk melihat matriks perbandingan parameter dan program studi secara mendalam.
             </p>
           </div>
           <Link
             href="/search?jalur=snbp"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-xs rounded-xl hover:bg-zinc-200 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white dark:bg-white dark:text-black font-bold text-xs rounded-xl hover:bg-slate-800 dark:hover:bg-zinc-200 transition-colors shadow-sm"
           >
             <Plus className="w-4 h-4" />
             <span>Pilih PTN Sekarang</span>
@@ -267,22 +267,22 @@ export default function ComparePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Slot 1 */}
             {ptn1 && ptn1.ptn ? (
-              <div className="bg-zinc-950 rounded-3xl border-2 border-white p-6 space-y-4 shadow-xl relative">
+              <div className="bg-white dark:bg-zinc-950 rounded-3xl border-2 border-slate-900 dark:border-white p-6 space-y-4 shadow-xl relative transition-colors">
                 <button
                   onClick={() => removeFromCompare(ptn1.ptn.id_ptn)}
-                  className="absolute top-4 right-4 p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-900 border border-zinc-800"
+                  className="absolute top-4 right-4 p-2 rounded-xl text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-900 border border-slate-200 dark:border-zinc-800"
                   title="Hapus dari komparasi"
                 >
                   <X className="w-4 h-4" />
                 </button>
                 <div className="space-y-2 pr-8">
-                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-md bg-white text-black uppercase">
+                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-md bg-slate-900 text-white dark:bg-white dark:text-black uppercase">
                     PTN 1 ({ptn1.jalur.toUpperCase()})
                   </span>
-                  <h3 className="font-black text-xl text-white">
+                  <h3 className="font-black text-xl text-slate-900 dark:text-white">
                     {ptn1.ptn.nama}
                   </h3>
-                  <div className="flex flex-wrap gap-2 text-xs text-zinc-400 font-mono">
+                  <div className="flex flex-wrap gap-2 text-xs text-slate-500 dark:text-zinc-400 font-mono">
                     <span className="flex items-center gap-1">
                       <Building2 className="w-3.5 h-3.5" /> Kode {ptn1.ptn.kode_ptn}
                     </span>
@@ -292,13 +292,13 @@ export default function ComparePage() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 pt-2 text-center text-xs">
-                  <div className="bg-black p-3 rounded-xl border border-zinc-800">
-                    <div className="text-[10px] text-zinc-500 font-mono">Jumlah Prodi</div>
-                    <div className="font-black text-white text-base">{metrics1.totalProdi}</div>
+                  <div className="bg-slate-50 dark:bg-black p-3 rounded-xl border border-slate-200 dark:border-zinc-800">
+                    <div className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono">Jumlah Prodi</div>
+                    <div className="font-black text-slate-900 dark:text-white text-base">{metrics1.totalProdi}</div>
                   </div>
-                  <div className="bg-black p-3 rounded-xl border border-zinc-800">
-                    <div className="text-[10px] text-zinc-500 font-mono">Total Daya Tampung</div>
-                    <div className="font-black text-white text-base">
+                  <div className="bg-slate-50 dark:bg-black p-3 rounded-xl border border-slate-200 dark:border-zinc-800">
+                    <div className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono">Total Daya Tampung</div>
+                    <div className="font-black text-slate-900 dark:text-white text-base">
                       {formatNumber(metrics1.totalDayaTampung)}
                     </div>
                   </div>
@@ -308,22 +308,22 @@ export default function ComparePage() {
 
             {/* Slot 2 */}
             {ptn2 && ptn2.ptn ? (
-              <div className="bg-zinc-950 rounded-3xl border-2 border-white p-6 space-y-4 shadow-xl relative">
+              <div className="bg-white dark:bg-zinc-950 rounded-3xl border-2 border-slate-900 dark:border-white p-6 space-y-4 shadow-xl relative transition-colors">
                 <button
                   onClick={() => removeFromCompare(ptn2.ptn.id_ptn)}
-                  className="absolute top-4 right-4 p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-900 border border-zinc-800"
+                  className="absolute top-4 right-4 p-2 rounded-xl text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-900 border border-slate-200 dark:border-zinc-800"
                   title="Hapus dari komparasi"
                 >
                   <X className="w-4 h-4" />
                 </button>
                 <div className="space-y-2 pr-8">
-                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-md bg-white text-black uppercase">
+                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-md bg-slate-900 text-white dark:bg-white dark:text-black uppercase">
                     PTN 2 ({ptn2.jalur.toUpperCase()})
                   </span>
-                  <h3 className="font-black text-xl text-white">
+                  <h3 className="font-black text-xl text-slate-900 dark:text-white">
                     {ptn2.ptn.nama}
                   </h3>
-                  <div className="flex flex-wrap gap-2 text-xs text-zinc-400 font-mono">
+                  <div className="flex flex-wrap gap-2 text-xs text-slate-500 dark:text-zinc-400 font-mono">
                     <span className="flex items-center gap-1">
                       <Building2 className="w-3.5 h-3.5" /> Kode {ptn2.ptn.kode_ptn}
                     </span>
@@ -333,32 +333,32 @@ export default function ComparePage() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 pt-2 text-center text-xs">
-                  <div className="bg-black p-3 rounded-xl border border-zinc-800">
-                    <div className="text-[10px] text-zinc-500 font-mono">Jumlah Prodi</div>
-                    <div className="font-black text-white text-base">{metrics2.totalProdi}</div>
+                  <div className="bg-slate-50 dark:bg-black p-3 rounded-xl border border-slate-200 dark:border-zinc-800">
+                    <div className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono">Jumlah Prodi</div>
+                    <div className="font-black text-slate-900 dark:text-white text-base">{metrics2.totalProdi}</div>
                   </div>
-                  <div className="bg-black p-3 rounded-xl border border-zinc-800">
-                    <div className="text-[10px] text-zinc-500 font-mono">Total Daya Tampung</div>
-                    <div className="font-black text-white text-base">
+                  <div className="bg-slate-50 dark:bg-black p-3 rounded-xl border border-slate-200 dark:border-zinc-800">
+                    <div className="text-[10px] text-slate-500 dark:text-zinc-500 font-mono">Total Daya Tampung</div>
+                    <div className="font-black text-slate-900 dark:text-white text-base">
                       {formatNumber(metrics2.totalDayaTampung)}
                     </div>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="bg-black border-2 border-dashed border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center space-y-3 min-h-[220px]">
-                <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 text-white flex items-center justify-center">
+              <div className="bg-slate-50 dark:bg-black border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center space-y-3 min-h-[220px]">
+                <div className="w-12 h-12 rounded-2xl bg-slate-200 dark:bg-zinc-900 border border-slate-300 dark:border-zinc-800 text-slate-900 dark:text-white flex items-center justify-center">
                   <Plus className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-sm">Pilih PTN Kedua</h4>
-                  <p className="text-xs text-zinc-400 max-w-xs">
+                  <h4 className="font-bold text-slate-900 dark:text-white text-sm">Pilih PTN Kedua</h4>
+                  <p className="text-xs text-slate-500 dark:text-zinc-400 max-w-xs">
                     Tambah PTN lain dari explorer untuk membandingkan parameter secara lengkap
                   </p>
                 </div>
                 <Link
                   href="/search?jalur=snbp"
-                  className="px-5 py-2.5 bg-white text-black rounded-xl text-xs font-bold hover:bg-zinc-200 transition-colors"
+                  className="px-5 py-2.5 bg-slate-900 text-white dark:bg-white dark:text-black rounded-xl text-xs font-bold hover:bg-slate-800 dark:hover:bg-zinc-200 transition-colors shadow-sm"
                 >
                   Cari PTN
                 </Link>
@@ -367,14 +367,14 @@ export default function ComparePage() {
           </div>
 
           {/* Comparison Matrix Table */}
-          <div className="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 shadow-md space-y-4">
+          <div className="bg-white dark:bg-zinc-950 rounded-3xl border border-slate-200/80 dark:border-zinc-800 p-6 shadow-sm dark:shadow-md space-y-4 transition-colors">
             <div className="flex items-center justify-between">
-              <h3 className="font-black text-lg text-white uppercase tracking-tight flex items-center gap-2">
+              <h3 className="font-black text-lg text-slate-900 dark:text-white uppercase tracking-tight flex items-center gap-2">
                 <BookOpen className="w-5 h-5" />
                 <span>Matriks Perbandingan Parameter</span>
               </h3>
               {isLoading && (
-                <div className="flex items-center gap-1.5 text-xs text-zinc-400 font-mono">
+                <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-zinc-400 font-mono">
                   <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                   <span>Memuat data prodi...</span>
                 </div>
@@ -384,39 +384,39 @@ export default function ComparePage() {
             <div className="overflow-x-auto custom-scrollbar">
               <table className="w-full text-left text-xs sm:text-sm">
                 <thead>
-                  <tr className="border-b border-zinc-800 bg-black font-mono text-zinc-400 text-[11px] uppercase tracking-wider">
+                  <tr className="border-b border-slate-200 dark:border-zinc-800 bg-slate-100/80 dark:bg-black font-mono text-slate-600 dark:text-zinc-400 text-[11px] uppercase tracking-wider">
                     <th className="py-3.5 px-4 font-bold min-w-[200px]">PARAMETER</th>
-                    <th className="py-3.5 px-4 font-bold text-white min-w-[220px]">
+                    <th className="py-3.5 px-4 font-bold text-slate-900 dark:text-white min-w-[220px]">
                       {ptn1?.ptn?.nama || "PTN 1"}
                     </th>
                     {ptn2?.ptn && (
-                      <th className="py-3.5 px-4 font-bold text-white min-w-[220px]">
+                      <th className="py-3.5 px-4 font-bold text-slate-900 dark:text-white min-w-[220px]">
                         {ptn2.ptn.nama}
                       </th>
                     )}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-900">
+                <tbody className="divide-y divide-slate-100 dark:divide-zinc-900">
                   {/* Basic Identifiers */}
                   <tr>
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Kode PTN</td>
-                    <td className="py-3.5 px-4 font-mono font-bold text-white">{ptn1?.ptn?.kode_ptn || "-"}</td>
-                    {ptn2?.ptn && <td className="py-3.5 px-4 font-mono font-bold text-white">{ptn2.ptn.kode_ptn}</td>}
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Kode PTN</td>
+                    <td className="py-3.5 px-4 font-mono font-bold text-slate-900 dark:text-white">{ptn1?.ptn?.kode_ptn || "-"}</td>
+                    {ptn2?.ptn && <td className="py-3.5 px-4 font-mono font-bold text-slate-900 dark:text-white">{ptn2.ptn.kode_ptn}</td>}
                   </tr>
                   <tr>
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Tipe PTN</td>
-                    <td className="py-3.5 px-4 uppercase font-bold text-white">{ptn1?.ptn?.type || "-"}</td>
-                    {ptn2?.ptn && <td className="py-3.5 px-4 uppercase font-bold text-white">{ptn2.ptn.type}</td>}
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Tipe PTN</td>
+                    <td className="py-3.5 px-4 uppercase font-bold text-slate-900 dark:text-white">{ptn1?.ptn?.type || "-"}</td>
+                    {ptn2?.ptn && <td className="py-3.5 px-4 uppercase font-bold text-slate-900 dark:text-white">{ptn2.ptn.type}</td>}
                   </tr>
                   <tr>
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Provinsi</td>
-                    <td className="py-3.5 px-4 text-zinc-300 font-semibold">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Provinsi</td>
+                    <td className="py-3.5 px-4 text-slate-800 dark:text-zinc-300 font-semibold">
                       {Array.isArray(ptn1?.ptn?.provinsi)
                         ? ptn1.ptn.provinsi.map((p) => capitalizeWords(p?.nama_prov1 || "")).filter(Boolean).join(", ") || "-"
                         : "-"}
                     </td>
                     {ptn2?.ptn && (
-                      <td className="py-3.5 px-4 text-zinc-300 font-semibold">
+                      <td className="py-3.5 px-4 text-slate-800 dark:text-zinc-300 font-semibold">
                         {Array.isArray(ptn2.ptn.provinsi)
                           ? ptn2.ptn.provinsi.map((p) => capitalizeWords(p?.nama_prov1 || "")).filter(Boolean).join(", ") || "-"
                           : "-"}
@@ -424,41 +424,41 @@ export default function ComparePage() {
                     )}
                   </tr>
                   <tr>
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Alamat</td>
-                    <td className="py-3.5 px-4 text-zinc-300 text-xs">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Alamat</td>
+                    <td className="py-3.5 px-4 text-slate-700 dark:text-zinc-300 text-xs">
                       {ptn1?.ptn?.alamat && ptn1.ptn.alamat !== "none" ? ptn1.ptn.alamat : "-"}
                     </td>
                     {ptn2?.ptn && (
-                      <td className="py-3.5 px-4 text-zinc-300 text-xs">
+                      <td className="py-3.5 px-4 text-slate-700 dark:text-zinc-300 text-xs">
                         {ptn2.ptn.alamat && ptn2.ptn.alamat !== "none" ? ptn2.ptn.alamat : "-"}
                       </td>
                     )}
                   </tr>
 
                   {/* Quantitative Capacity & Prodi Metrics */}
-                  <tr className="bg-zinc-900/30">
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Jumlah Program Studi</td>
-                    <td className="py-3.5 px-4 font-bold text-white">{metrics1.totalProdi} prodi</td>
-                    {ptn2?.ptn && <td className="py-3.5 px-4 font-bold text-white">{metrics2.totalProdi} prodi</td>}
+                  <tr className="bg-slate-50/50 dark:bg-zinc-900/30">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Jumlah Program Studi</td>
+                    <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">{metrics1.totalProdi} prodi</td>
+                    {ptn2?.ptn && <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">{metrics2.totalProdi} prodi</td>}
                   </tr>
-                  <tr className="bg-zinc-900/30">
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Total Daya Tampung</td>
-                    <td className="py-3.5 px-4 font-black text-white text-base">
+                  <tr className="bg-slate-50/50 dark:bg-zinc-900/30">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Total Daya Tampung</td>
+                    <td className="py-3.5 px-4 font-black text-slate-900 dark:text-white text-base">
                       {formatNumber(metrics1.totalDayaTampung)}
                     </td>
                     {ptn2?.ptn && (
-                      <td className="py-3.5 px-4 font-black text-white text-base">
+                      <td className="py-3.5 px-4 font-black text-slate-900 dark:text-white text-base">
                         {formatNumber(metrics2.totalDayaTampung)}
                       </td>
                     )}
                   </tr>
-                  <tr className="bg-zinc-900/30">
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Rata-rata Kuota / Prodi</td>
-                    <td className="py-3.5 px-4 font-semibold text-white">
+                  <tr className="bg-slate-50/50 dark:bg-zinc-900/30">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Rata-rata Kuota / Prodi</td>
+                    <td className="py-3.5 px-4 font-semibold text-slate-900 dark:text-white">
                       {metrics1.avgDayaTampung ? `${metrics1.avgDayaTampung} kursi` : "-"}
                     </td>
                     {ptn2?.ptn && (
-                      <td className="py-3.5 px-4 font-semibold text-white">
+                      <td className="py-3.5 px-4 font-semibold text-slate-900 dark:text-white">
                         {metrics2.avgDayaTampung ? `${metrics2.avgDayaTampung} kursi` : "-"}
                       </td>
                     )}
@@ -466,42 +466,42 @@ export default function ComparePage() {
 
                   {/* Competitiveness & Applicant Metrics */}
                   <tr>
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Rata-rata Peluang (5 Thn)</td>
-                    <td className="py-3.5 px-4 font-bold text-emerald-400">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Rata-rata Peluang (5 Thn)</td>
+                    <td className="py-3.5 px-4 font-bold text-emerald-600 dark:text-emerald-400">
                       {formatPercent(metrics1.avgChance)}
                     </td>
                     {ptn2?.ptn && (
-                      <td className="py-3.5 px-4 font-bold text-emerald-400">
+                      <td className="py-3.5 px-4 font-bold text-emerald-600 dark:text-emerald-400">
                         {formatPercent(metrics2.avgChance)}
                       </td>
                     )}
                   </tr>
                   <tr>
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Rasio Persaingan (Terbaru)</td>
-                    <td className="py-3.5 px-4 text-zinc-300 font-mono text-xs">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Rasio Persaingan (Terbaru)</td>
+                    <td className="py-3.5 px-4 text-slate-700 dark:text-zinc-300 font-mono text-xs">
                       {metrics1.competitionRatio}
                     </td>
                     {ptn2?.ptn && (
-                      <td className="py-3.5 px-4 text-zinc-300 font-mono text-xs">
+                      <td className="py-3.5 px-4 text-slate-700 dark:text-zinc-300 font-mono text-xs">
                         {metrics2.competitionRatio}
                       </td>
                     )}
                   </tr>
                   <tr>
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Sebaran Jenjang</td>
-                    <td className="py-3.5 px-4 text-zinc-300 font-mono text-xs">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Sebaran Jenjang</td>
+                    <td className="py-3.5 px-4 text-slate-700 dark:text-zinc-300 font-mono text-xs">
                       {metrics1.jenjangSummary}
                     </td>
                     {ptn2?.ptn && (
-                      <td className="py-3.5 px-4 text-zinc-300 font-mono text-xs">
+                      <td className="py-3.5 px-4 text-slate-700 dark:text-zinc-300 font-mono text-xs">
                         {metrics2.jenjangSummary}
                       </td>
                     )}
                   </tr>
 
                   {/* Top Highlights */}
-                  <tr className="bg-zinc-900/30">
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Prodi Paling Ketat</td>
+                  <tr className="bg-slate-50/50 dark:bg-zinc-900/30">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Prodi Paling Ketat</td>
                     <td className="py-3.5 px-4">
                       {metrics1.mostCompetitive ? (
                         <button
@@ -512,13 +512,13 @@ export default function ComparePage() {
                               jalur: ptn1!.jalur,
                             })
                           }
-                          className="text-left group hover:text-white"
+                          className="text-left group hover:text-slate-900 dark:hover:text-white"
                         >
-                          <div className="font-bold text-white group-hover:underline flex items-center gap-1">
+                          <div className="font-bold text-slate-900 dark:text-white group-hover:underline flex items-center gap-1">
                             <span>{metrics1.mostCompetitive.nama}</span>
                             <Eye className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" />
                           </div>
-                          <div className="text-[11px] text-zinc-400 font-mono">
+                          <div className="text-[11px] text-slate-500 dark:text-zinc-400 font-mono">
                             Peluang: {formatPercent(metrics1.mostCompetitive.chance_5_year)} • Kuota: {metrics1.mostCompetitive.daya_tampung}
                           </div>
                         </button>
@@ -537,13 +537,13 @@ export default function ComparePage() {
                                 jalur: ptn2.jalur,
                               })
                             }
-                            className="text-left group hover:text-white"
+                            className="text-left group hover:text-slate-900 dark:hover:text-white"
                           >
-                            <div className="font-bold text-white group-hover:underline flex items-center gap-1">
+                            <div className="font-bold text-slate-900 dark:text-white group-hover:underline flex items-center gap-1">
                               <span>{metrics2.mostCompetitive.nama}</span>
                               <Eye className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" />
                             </div>
-                            <div className="text-[11px] text-zinc-400 font-mono">
+                            <div className="text-[11px] text-slate-500 dark:text-zinc-400 font-mono">
                               Peluang: {formatPercent(metrics2.mostCompetitive.chance_5_year)} • Kuota: {metrics2.mostCompetitive.daya_tampung}
                             </div>
                           </button>
@@ -554,8 +554,8 @@ export default function ComparePage() {
                     )}
                   </tr>
 
-                  <tr className="bg-zinc-900/30">
-                    <td className="py-3.5 px-4 font-semibold text-zinc-400 font-mono">Daya Tampung Terbesar</td>
+                  <tr className="bg-slate-50/50 dark:bg-zinc-900/30">
+                    <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-zinc-400 font-mono">Daya Tampung Terbesar</td>
                     <td className="py-3.5 px-4">
                       {metrics1.largestQuota ? (
                         <button
@@ -566,13 +566,13 @@ export default function ComparePage() {
                               jalur: ptn1!.jalur,
                             })
                           }
-                          className="text-left group hover:text-white"
+                          className="text-left group hover:text-slate-900 dark:hover:text-white"
                         >
-                          <div className="font-bold text-white group-hover:underline flex items-center gap-1">
+                          <div className="font-bold text-slate-900 dark:text-white group-hover:underline flex items-center gap-1">
                             <span>{metrics1.largestQuota.nama}</span>
                             <Eye className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" />
                           </div>
-                          <div className="text-[11px] text-zinc-400 font-mono">
+                          <div className="text-[11px] text-slate-500 dark:text-zinc-400 font-mono">
                             Kuota: {metrics1.largestQuota.daya_tampung} kursi
                           </div>
                         </button>
@@ -591,13 +591,13 @@ export default function ComparePage() {
                                 jalur: ptn2.jalur,
                               })
                             }
-                            className="text-left group hover:text-white"
+                            className="text-left group hover:text-slate-900 dark:hover:text-white"
                           >
-                            <div className="font-bold text-white group-hover:underline flex items-center gap-1">
+                            <div className="font-bold text-slate-900 dark:text-white group-hover:underline flex items-center gap-1">
                               <span>{metrics2.largestQuota.nama}</span>
                               <Eye className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" />
                             </div>
-                            <div className="text-[11px] text-zinc-400 font-mono">
+                            <div className="text-[11px] text-slate-500 dark:text-zinc-400 font-mono">
                               Kuota: {metrics2.largestQuota.daya_tampung} kursi
                             </div>
                           </button>
@@ -613,14 +613,14 @@ export default function ComparePage() {
           </div>
 
           {/* Program Studi Section with Tabs & Clickable Cards */}
-          <div className="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 shadow-md space-y-4">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-zinc-900 pb-4">
+          <div className="bg-white dark:bg-zinc-950 rounded-3xl border border-slate-200/80 dark:border-zinc-800 p-6 shadow-sm dark:shadow-md space-y-4 transition-colors">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 dark:border-zinc-900 pb-4">
               <div>
-                <h3 className="font-black text-lg text-white uppercase tracking-tight flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-white" />
+                <h3 className="font-black text-lg text-slate-900 dark:text-white uppercase tracking-tight flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-slate-900 dark:text-white" />
                   <span>Daftar Program Studi</span>
                 </h3>
-                <p className="text-xs text-zinc-400">
+                <p className="text-xs text-slate-600 dark:text-zinc-400">
                   Klik pada program studi mana pun untuk melihat grafik histori & analisis detail.
                 </p>
               </div>
@@ -628,18 +628,18 @@ export default function ComparePage() {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                 {/* Search Input */}
                 <div className="relative min-w-[200px] sm:w-64">
-                  <Search className="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <Search className="w-4 h-4 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Cari prodi / jenjang..."
-                    className="w-full pl-9 pr-8 py-1.5 bg-black border border-zinc-800 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-all"
+                    className="w-full pl-9 pr-8 py-1.5 bg-slate-50 dark:bg-black border border-slate-200 dark:border-zinc-800 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:border-slate-900 dark:focus:border-white transition-all"
                   />
                   {searchTerm && (
                     <button
                       onClick={() => setSearchTerm("")}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white"
                       title="Hapus pencarian"
                     >
                       <X className="w-3.5 h-3.5" />
@@ -648,14 +648,14 @@ export default function ComparePage() {
                 </div>
 
                 {/* Navigation Tabs */}
-                <div className="flex items-center gap-1.5 bg-black p-1 rounded-xl border border-zinc-800 text-xs font-semibold shrink-0">
+                <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-black p-1 rounded-xl border border-slate-200 dark:border-zinc-800 text-xs font-semibold shrink-0">
                   {ptn2 && matchingProdi.length > 0 && (
                     <button
                       onClick={() => setActiveTab("matching")}
                       className={`px-3 py-1.5 rounded-lg transition-colors ${
                         activeTab === "matching"
-                          ? "bg-white text-black font-bold"
-                          : "text-zinc-400 hover:text-white"
+                          ? "bg-slate-900 text-white dark:bg-white dark:text-black font-bold shadow-sm"
+                          : "text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white"
                       }`}
                     >
                       Sepadan ({matchingProdi.length})
@@ -666,8 +666,8 @@ export default function ComparePage() {
                       onClick={() => setActiveTab("all_ptn1")}
                       className={`px-3 py-1.5 rounded-lg transition-colors truncate max-w-[140px] ${
                         activeTab === "all_ptn1"
-                          ? "bg-white text-black font-bold"
-                          : "text-zinc-400 hover:text-white"
+                          ? "bg-slate-900 text-white dark:bg-white dark:text-black font-bold shadow-sm"
+                          : "text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white"
                       }`}
                     >
                       {ptn1.ptn.nama} ({ptn1.prodi.length})
@@ -678,8 +678,8 @@ export default function ComparePage() {
                       onClick={() => setActiveTab("all_ptn2")}
                       className={`px-3 py-1.5 rounded-lg transition-colors truncate max-w-[140px] ${
                         activeTab === "all_ptn2"
-                          ? "bg-white text-black font-bold"
-                          : "text-zinc-400 hover:text-white"
+                          ? "bg-slate-900 text-white dark:bg-white dark:text-black font-bold shadow-sm"
+                          : "text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white"
                       }`}
                     >
                       {ptn2.ptn.nama} ({ptn2.prodi.length})
@@ -702,16 +702,16 @@ export default function ComparePage() {
                     return (
                       <div
                         key={p1.id_prodi}
-                        className="p-4 rounded-2xl bg-black border border-zinc-800 text-xs space-y-3 hover:border-zinc-700 transition-all"
+                        className="p-4 rounded-2xl bg-slate-50 dark:bg-black border border-slate-200 dark:border-zinc-800 text-xs space-y-3 hover:border-slate-300 dark:hover:border-zinc-700 transition-all"
                       >
-                        <div className="font-extrabold text-white text-sm flex items-center justify-between">
+                        <div className="font-extrabold text-slate-900 dark:text-white text-sm flex items-center justify-between">
                           <span>{p1.nama}</span>
-                          <span className="text-[10px] font-mono font-normal text-zinc-500 bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800">
+                          <span className="text-[10px] font-mono font-normal text-slate-600 dark:text-zinc-500 bg-slate-200/70 dark:bg-zinc-900 px-2 py-0.5 rounded border border-slate-300 dark:border-zinc-800">
                             {p1.jenjang}
                           </span>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-2 text-zinc-400 pt-2 border-t border-zinc-900">
+                        <div className="grid grid-cols-2 gap-2 text-slate-600 dark:text-zinc-400 pt-2 border-t border-slate-200 dark:border-zinc-900">
                           {/* PTN 1 Column */}
                           <div
                             onClick={() =>
@@ -721,15 +721,15 @@ export default function ComparePage() {
                                 jalur: ptn1!.jalur,
                               })
                             }
-                            className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800/80 hover:border-white cursor-pointer group transition-all"
+                            className="p-2.5 rounded-xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 hover:border-slate-900 dark:hover:border-white cursor-pointer group transition-all shadow-xs"
                           >
-                            <div className="text-[10px] font-mono font-bold text-white truncate flex items-center justify-between">
+                            <div className="text-[10px] font-mono font-bold text-slate-900 dark:text-white truncate flex items-center justify-between">
                               <span className="truncate">{ptn1?.ptn?.nama || "PTN 1"}</span>
-                              <Eye className="w-3 h-3 text-zinc-500 group-hover:text-white shrink-0 ml-1" />
+                              <Eye className="w-3 h-3 text-slate-400 dark:text-zinc-500 group-hover:text-slate-900 dark:group-hover:text-white shrink-0 ml-1" />
                             </div>
                             <div className="mt-1 space-y-0.5 text-[11px]">
-                              <div>Daya Tampung: <span className="font-bold text-white">{p1.daya_tampung}</span></div>
-                              <div>Peluang: <span className="font-bold text-emerald-400">{formatPercent(p1.chance_5_year)}</span></div>
+                              <div>Daya Tampung: <span className="font-bold text-slate-900 dark:text-white">{p1.daya_tampung}</span></div>
+                              <div>Peluang: <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatPercent(p1.chance_5_year)}</span></div>
                             </div>
                           </div>
 
@@ -743,15 +743,15 @@ export default function ComparePage() {
                                   jalur: ptn2!.jalur,
                                 })
                               }
-                              className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800/80 hover:border-white cursor-pointer group transition-all"
+                              className="p-2.5 rounded-xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 hover:border-slate-900 dark:hover:border-white cursor-pointer group transition-all shadow-xs"
                             >
-                              <div className="text-[10px] font-mono font-bold text-white truncate flex items-center justify-between">
+                              <div className="text-[10px] font-mono font-bold text-slate-900 dark:text-white truncate flex items-center justify-between">
                                 <span className="truncate">{ptn2?.ptn?.nama || "PTN 2"}</span>
-                                <Eye className="w-3 h-3 text-zinc-500 group-hover:text-white shrink-0 ml-1" />
+                                <Eye className="w-3 h-3 text-slate-400 dark:text-zinc-500 group-hover:text-slate-900 dark:group-hover:text-white shrink-0 ml-1" />
                               </div>
                               <div className="mt-1 space-y-0.5 text-[11px]">
-                                <div>Daya Tampung: <span className="font-bold text-white">{p2Match.daya_tampung}</span></div>
-                                <div>Peluang: <span className="font-bold text-emerald-400">{formatPercent(p2Match.chance_5_year)}</span></div>
+                                <div>Daya Tampung: <span className="font-bold text-slate-900 dark:text-white">{p2Match.daya_tampung}</span></div>
+                                <div>Peluang: <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatPercent(p2Match.chance_5_year)}</span></div>
                               </div>
                             </div>
                           )}
@@ -761,10 +761,10 @@ export default function ComparePage() {
                   })}
                 </div>
               ) : (
-                <div className="p-8 text-center bg-black rounded-2xl border border-zinc-800 space-y-1">
-                  <p className="text-xs font-semibold text-zinc-300">Tidak ada program studi sepadan yang cocok</p>
+                <div className="p-8 text-center bg-slate-50 dark:bg-black rounded-2xl border border-slate-200 dark:border-zinc-800 space-y-1">
+                  <p className="text-xs font-semibold text-slate-700 dark:text-zinc-300">Tidak ada program studi sepadan yang cocok</p>
                   {searchTerm && (
-                    <p className="text-[11px] text-zinc-500 font-mono">
+                    <p className="text-[11px] text-slate-500 dark:text-zinc-500 font-mono">
                       Kata kunci: &quot;{searchTerm}&quot;
                     </p>
                   )}
@@ -786,28 +786,28 @@ export default function ComparePage() {
                           jalur: ptn1.jalur,
                         })
                       }
-                      className="p-3.5 rounded-2xl bg-black border border-zinc-800 hover:border-white text-left transition-all group space-y-2"
+                      className="p-3.5 rounded-2xl bg-slate-50 dark:bg-black border border-slate-200 dark:border-zinc-800 hover:border-slate-900 dark:hover:border-white text-left transition-all group space-y-2"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <h4 className="font-bold text-white text-xs group-hover:text-emerald-400 transition-colors line-clamp-1">
+                        <h4 className="font-bold text-slate-900 dark:text-white text-xs group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-1">
                           {p.nama}
                         </h4>
-                        <span className="text-[10px] font-mono bg-zinc-900 text-zinc-400 px-2 py-0.5 rounded border border-zinc-800 shrink-0">
+                        <span className="text-[10px] font-mono bg-slate-200/70 dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 px-2 py-0.5 rounded border border-slate-300 dark:border-zinc-800 shrink-0">
                           {p.jenjang}
                         </span>
                       </div>
-                      <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                        <span>Kuota: <strong className="text-white">{p.daya_tampung}</strong></span>
-                        <span>Peluang: <strong className="text-emerald-400">{formatPercent(p.chance_5_year)}</strong></span>
+                      <div className="flex items-center justify-between text-[11px] font-mono text-slate-600 dark:text-zinc-400">
+                        <span>Kuota: <strong className="text-slate-900 dark:text-white">{p.daya_tampung}</strong></span>
+                        <span>Peluang: <strong className="text-emerald-600 dark:text-emerald-400">{formatPercent(p.chance_5_year)}</strong></span>
                       </div>
                     </button>
                   ))}
                 </div>
               ) : (
-                <div className="p-8 text-center bg-black rounded-2xl border border-zinc-800 space-y-1">
-                  <p className="text-xs font-semibold text-zinc-300">Tidak ada program studi yang cocok</p>
+                <div className="p-8 text-center bg-slate-50 dark:bg-black rounded-2xl border border-slate-200 dark:border-zinc-800 space-y-1">
+                  <p className="text-xs font-semibold text-slate-700 dark:text-zinc-300">Tidak ada program studi yang cocok</p>
                   {searchTerm && (
-                    <p className="text-[11px] text-zinc-500 font-mono">
+                    <p className="text-[11px] text-slate-500 dark:text-zinc-500 font-mono">
                       Kata kunci: &quot;{searchTerm}&quot;
                     </p>
                   )}
@@ -829,28 +829,28 @@ export default function ComparePage() {
                           jalur: ptn2.jalur,
                         })
                       }
-                      className="p-3.5 rounded-2xl bg-black border border-zinc-800 hover:border-white text-left transition-all group space-y-2"
+                      className="p-3.5 rounded-2xl bg-slate-50 dark:bg-black border border-slate-200 dark:border-zinc-800 hover:border-slate-900 dark:hover:border-white text-left transition-all group space-y-2"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <h4 className="font-bold text-white text-xs group-hover:text-emerald-400 transition-colors line-clamp-1">
+                        <h4 className="font-bold text-slate-900 dark:text-white text-xs group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-1">
                           {p.nama}
                         </h4>
-                        <span className="text-[10px] font-mono bg-zinc-900 text-zinc-400 px-2 py-0.5 rounded border border-zinc-800 shrink-0">
+                        <span className="text-[10px] font-mono bg-slate-200/70 dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 px-2 py-0.5 rounded border border-slate-300 dark:border-zinc-800 shrink-0">
                           {p.jenjang}
                         </span>
                       </div>
-                      <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                        <span>Kuota: <strong className="text-white">{p.daya_tampung}</strong></span>
-                        <span>Peluang: <strong className="text-emerald-400">{formatPercent(p.chance_5_year)}</strong></span>
+                      <div className="flex items-center justify-between text-[11px] font-mono text-slate-600 dark:text-zinc-400">
+                        <span>Kuota: <strong className="text-slate-900 dark:text-white">{p.daya_tampung}</strong></span>
+                        <span>Peluang: <strong className="text-emerald-600 dark:text-emerald-400">{formatPercent(p.chance_5_year)}</strong></span>
                       </div>
                     </button>
                   ))}
                 </div>
               ) : (
-                <div className="p-8 text-center bg-black rounded-2xl border border-zinc-800 space-y-1">
-                  <p className="text-xs font-semibold text-zinc-300">Tidak ada program studi yang cocok</p>
+                <div className="p-8 text-center bg-slate-50 dark:bg-black rounded-2xl border border-slate-200 dark:border-zinc-800 space-y-1">
+                  <p className="text-xs font-semibold text-slate-700 dark:text-zinc-300">Tidak ada program studi yang cocok</p>
                   {searchTerm && (
-                    <p className="text-[11px] text-zinc-500 font-mono">
+                    <p className="text-[11px] text-slate-500 dark:text-zinc-500 font-mono">
                       Kata kunci: &quot;{searchTerm}&quot;
                     </p>
                   )}
